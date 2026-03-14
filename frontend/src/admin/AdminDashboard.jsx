@@ -27,7 +27,7 @@ const AdminDashboard = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/admin/stats', {
+        fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/stats`, {
             headers: { Authorization: `Bearer ${user?.token}` }
         })
             .then(r => r.json())

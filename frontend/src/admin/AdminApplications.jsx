@@ -18,7 +18,7 @@ const AdminApplications = () => {
 
     const fetchApplications = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/admin/applications', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/applications`, {
                 headers: { Authorization: `Bearer ${user?.token}` }
             });
             const data = await res.json();
@@ -35,7 +35,7 @@ const AdminApplications = () => {
 
         setActionLoading(id);
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/applications/${id}/${action}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/applications/${id}/${action}`, {
                 method: 'PATCH',
                 headers: { Authorization: `Bearer ${user?.token}` }
             });

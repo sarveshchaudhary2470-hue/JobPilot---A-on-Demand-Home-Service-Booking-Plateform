@@ -30,7 +30,7 @@ const AdminPartners = () => {
         setSelectedPartner(partners.find(p => p._id === partnerId));
 
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/partners/${partnerId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/partners/${partnerId}`, {
                 headers: { Authorization: `Bearer ${user?.token}` }
             });
             if (res.ok) {
@@ -46,7 +46,7 @@ const AdminPartners = () => {
 
     const fetchPartners = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/admin/partners', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/partners`, {
                 headers: { Authorization: `Bearer ${user?.token}` }
             });
             const data = await res.json();
@@ -62,7 +62,7 @@ const AdminPartners = () => {
         e.preventDefault();
         setSubmitting(true);
         try {
-            const res = await fetch('http://localhost:5000/api/admin/partners', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/partners`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -93,7 +93,7 @@ const AdminPartners = () => {
 
         setProcessingId(id);
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/partners/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/partners/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${user?.token}` }
             });
@@ -119,7 +119,7 @@ const AdminPartners = () => {
 
         setProcessingId(id);
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/partners/${id}/suspend`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/partners/${id}/suspend`, {
                 method: 'PATCH',
                 headers: { Authorization: `Bearer ${user?.token}` }
             });

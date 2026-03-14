@@ -121,7 +121,7 @@ const BookingCard = ({ booking, onCancel }) => {
     const handleCancel = async () => {
         setCancelling(true);
         try {
-            const res = await fetch(`http://localhost:5000/api/bookings/${booking._id}/cancel`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/${booking._id}/cancel`, {
                 method: 'PATCH',
                 headers: { Authorization: `Bearer ${user.token}` }
             });
@@ -139,7 +139,7 @@ const BookingCard = ({ booking, onCancel }) => {
     const handleReviewSubmit = async (rating, comment) => {
         setCancelling(true);
         try {
-            const res = await fetch('http://localhost:5000/api/reviews', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/reviews`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -306,7 +306,7 @@ const MyBookings = () => {
         const fetchBookings = async () => {
             if (!user) return;
             try {
-                const res = await fetch('http://localhost:5000/api/bookings/my', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/bookings/my`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 const data = await res.json();

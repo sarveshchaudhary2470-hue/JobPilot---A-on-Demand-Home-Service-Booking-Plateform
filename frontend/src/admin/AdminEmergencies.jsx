@@ -14,7 +14,7 @@ const AdminEmergencies = () => {
 
     const fetchEmergencies = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/admin/emergencies', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/emergencies`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             if (res.ok) {
@@ -31,7 +31,7 @@ const AdminEmergencies = () => {
     const handleResolve = async (id) => {
         if (!window.confirm('Are you sure you want to mark this emergency as resolved?')) return;
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/emergencies/${id}/resolve`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/emergencies/${id}/resolve`, {
                 method: 'PATCH',
                 headers: { Authorization: `Bearer ${user.token}` }
             });
@@ -46,7 +46,7 @@ const AdminEmergencies = () => {
     const handleDelete = async (id) => {
         if (!window.confirm('Are you sure you want to permanently delete this emergency log?')) return;
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/emergencies/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/emergencies/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${user.token}` }
             });

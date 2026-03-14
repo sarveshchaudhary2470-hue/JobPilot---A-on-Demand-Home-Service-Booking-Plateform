@@ -10,8 +10,8 @@ const ServiceSection = () => {
         const fetchAllData = async () => {
             try {
                 const [catRes, srRes] = await Promise.all([
-                    fetch('http://localhost:5000/api/categories'),
-                    fetch('http://localhost:5000/api/services')
+                    fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/categories`),
+                    fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/services`)
                 ]);
 
                 const catData = await catRes.json();

@@ -44,7 +44,7 @@ const OtpAndImageModal = ({ isOpen, type, onClose, onSubmit, loading, error, tok
             const formData = new FormData();
             formData.append('image', imageFile);
 
-            const uploadRes = await fetch('http://localhost:5000/api/upload/cloudinary', {
+            const uploadRes = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/upload/cloudinary`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 body: formData
@@ -250,7 +250,7 @@ const PartnerDashboard = () => {
     const [otpModal, setOtpModal] = useState({ isOpen: false, jobId: null, type: null, error: '', loading: false });
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/partner/jobs', {
+        fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/partner/jobs`, {
             headers: { Authorization: `Bearer ${user?.token}` }
         })
             .then(res => res.json())
@@ -278,7 +278,7 @@ const PartnerDashboard = () => {
         };
 
         try {
-            const res = await fetch(`http://localhost:5000/api/partner/jobs/${jobId}/status`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/partner/jobs/${jobId}/status`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.token}` },
                 body: JSON.stringify(bodyData)

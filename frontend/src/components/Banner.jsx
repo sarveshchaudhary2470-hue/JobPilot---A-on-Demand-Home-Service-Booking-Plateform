@@ -8,7 +8,7 @@ const Banner = () => {
     useEffect(() => {
         const fetchBanners = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/services/banners');
+                const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/services/banners`);
                 const data = await res.json();
                 if (data && data.length > 0) {
                     setBanners(data);

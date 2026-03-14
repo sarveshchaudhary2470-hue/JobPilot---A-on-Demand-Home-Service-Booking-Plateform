@@ -19,7 +19,7 @@ const AdminSupport = () => {
 
     const fetchTickets = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/admin/support', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/support`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();
@@ -36,7 +36,7 @@ const AdminSupport = () => {
         if (!window.confirm('Are you sure you want to permanently delete this ticket?')) return;
 
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/support/${ticketId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/support/${ticketId}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${user.token}` }
             });
@@ -56,7 +56,7 @@ const AdminSupport = () => {
         setReplying(true);
 
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/support/${selectedTicket._id}/reply`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/support/${selectedTicket._id}/reply`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

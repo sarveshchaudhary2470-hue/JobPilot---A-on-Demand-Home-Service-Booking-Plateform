@@ -193,8 +193,8 @@ const AdminBookings = () => {
         const fetchData = async () => {
             try {
                 const [bRes, pRes] = await Promise.all([
-                    fetch('http://localhost:5000/api/admin/bookings', { headers: { Authorization: `Bearer ${user?.token}` } }),
-                    fetch('http://localhost:5000/api/admin/partners', { headers: { Authorization: `Bearer ${user?.token}` } })
+                    fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/bookings`, { headers: { Authorization: `Bearer ${user?.token}` } }),
+                    fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/partners`, { headers: { Authorization: `Bearer ${user?.token}` } })
                 ]);
                 setBookings(await bRes.json());
                 setPartners(await pRes.json());
@@ -213,12 +213,12 @@ const AdminBookings = () => {
             let url, method, body;
 
             if (type === 'status') {
-                url = `http://localhost:5000/api/admin/bookings/${bookingId}/status`;
+                url = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/bookings/${bookingId}/status`;
                 method = 'PATCH';
                 body = JSON.stringify({ status: val });
             } else if (type === 'assign') {
                 if (!val) { setUpdating(null); return; } // Empty assign
-                url = `http://localhost:5000/api/admin/bookings/${bookingId}/assign`;
+                url = `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/bookings/${bookingId}/assign`;
                 method = 'PATCH';
                 body = JSON.stringify({ partnerId: val });
             }
@@ -240,7 +240,7 @@ const AdminBookings = () => {
         if (!window.confirm('Delete this booking permanently?')) return;
         setDeleting(bookingId);
         try {
-            await fetch(`http://localhost:5000/api/admin/bookings/${bookingId}`, {
+            await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/bookings/${bookingId}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${user?.token}` }
             });

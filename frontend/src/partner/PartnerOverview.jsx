@@ -21,7 +21,7 @@ const PartnerOverview = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/partner/jobs', {
+        fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/partner/jobs`, {
             headers: { Authorization: `Bearer ${user?.token}` }
         })
             .then(res => res.json())

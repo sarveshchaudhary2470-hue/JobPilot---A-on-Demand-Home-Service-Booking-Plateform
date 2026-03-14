@@ -11,7 +11,7 @@ const CategoryList = () => {
         const fetchCategories = async () => {
             try {
                 // Using the full URL here for local dev API
-                const res = await fetch('http://localhost:5000/api/categories');
+                const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/categories`);
                 const data = await res.json();
                 setCategories(data);
                 setLoading(false);

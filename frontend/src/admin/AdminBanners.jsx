@@ -19,7 +19,7 @@ const AdminBanners = () => {
 
     const fetchBanners = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/admin/banners', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/banners`, {
                 headers: { Authorization: `Bearer ${user?.token}` }
             });
             const data = await res.json();
@@ -49,7 +49,7 @@ const AdminBanners = () => {
         formData.append('image', selectedFile);
 
         try {
-            const uploadRes = await fetch('http://localhost:5000/api/upload', {
+            const uploadRes = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/upload`, {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${user?.token}` },
                 body: formData
@@ -84,7 +84,7 @@ const AdminBanners = () => {
                 image: imageUrl
             };
 
-            const res = await fetch('http://localhost:5000/api/admin/banners', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/banners`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.token}` },
                 body: JSON.stringify(payload)
@@ -115,7 +115,7 @@ const AdminBanners = () => {
         if (!window.confirm('Are you sure you want to delete this banner? This cannot be undone.')) return;
 
         try {
-            await fetch(`http://localhost:5000/api/admin/banners/${id}`, {
+            await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/banners/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${user?.token}` }
             });
@@ -127,7 +127,7 @@ const AdminBanners = () => {
 
     const toggleStatus = async (banner) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/banners/${banner._id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/banners/${banner._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.token}` },
                 body: JSON.stringify({ isActive: !banner.isActive })

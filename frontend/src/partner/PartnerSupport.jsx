@@ -25,7 +25,7 @@ const PartnerSupport = () => {
 
     const fetchTickets = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/partner/support', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/partner/support`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();
@@ -44,7 +44,7 @@ const PartnerSupport = () => {
         setSubmitting(true);
 
         try {
-            const res = await fetch('http://localhost:5000/api/partner/support', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/partner/support`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const PartnerSupport = () => {
         setReplyingTo(ticketId);
 
         try {
-            const res = await fetch(`http://localhost:5000/api/partner/support/${ticketId}/reply`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/partner/support/${ticketId}/reply`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ const PartnerSupport = () => {
         if (!window.confirm('Are you sure you want to delete this resolved ticket?')) return;
 
         try {
-            const res = await fetch(`http://localhost:5000/api/partner/support/${ticketId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/partner/support/${ticketId}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${user.token}` }
             });

@@ -11,7 +11,7 @@ const AdminCategories = () => {
     const [saving, setSaving] = useState(false);
 
     const fetchCategories = async () => {
-        const res = await fetch('http://localhost:5000/api/categories');
+        const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/categories`);
         setCategories(await res.json());
         setLoading(false);
     };
@@ -36,7 +36,7 @@ const AdminCategories = () => {
                 bg: randomStyle.bg
             };
 
-            const res = await fetch('http://localhost:5000/api/admin/categories', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/categories`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.token}` },
                 body: JSON.stringify(payload)
@@ -58,7 +58,7 @@ const AdminCategories = () => {
 
     const handleDelete = async (id) => {
         if (!window.confirm('Delete this category?')) return;
-        await fetch(`http://localhost:5000/api/admin/categories/${id}`, {
+        await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/categories/${id}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${user?.token}` }
         });

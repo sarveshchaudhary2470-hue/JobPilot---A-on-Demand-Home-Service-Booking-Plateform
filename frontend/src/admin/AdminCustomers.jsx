@@ -12,7 +12,7 @@ const AdminCustomers = () => {
     useEffect(() => {
         const fetchCustomers = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/admin/customers', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/customers`, {
                     headers: { 'Authorization': `Bearer ${user?.token}` }
                 });
                 const data = await res.json();
@@ -41,7 +41,7 @@ const AdminCustomers = () => {
         if (!window.confirm(`Are you sure you want to ${currentStatus ? 'activate' : 'suspend'} this customer?`)) return;
 
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/customers/${id}/suspend`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/customers/${id}/suspend`, {
                 method: 'PATCH',
                 headers: { 'Authorization': `Bearer ${user?.token}` }
             });
@@ -59,7 +59,7 @@ const AdminCustomers = () => {
         if (!window.confirm('Are you sure you want to permanently delete this customer account? This cannot be undone.')) return;
 
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/customers/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/customers/${id}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${user?.token}` }
             });

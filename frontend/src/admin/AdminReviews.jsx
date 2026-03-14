@@ -15,7 +15,7 @@ const AdminReviews = () => {
 
     const fetchReviews = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/admin/reviews', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/reviews`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();
@@ -33,7 +33,7 @@ const AdminReviews = () => {
 
         setDeletingId(id);
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/reviews/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/reviews/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${user.token}` }
             });

@@ -21,7 +21,7 @@ const ImageInput = ({ value, onChange, token }) => {
         const data = new FormData();
         data.append('image', file);
         try {
-            const res = await fetch('http://localhost:5000/api/upload', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/upload`, {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${token}` },
                 body: data
@@ -135,8 +135,8 @@ const AdminServices = () => {
 
     const fetchAll = async () => {
         const [sRes, cRes] = await Promise.all([
-            fetch('http://localhost:5000/api/services'),
-            fetch('http://localhost:5000/api/categories')
+            fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/services`),
+            fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/categories`)
         ]);
         setServices(await sRes.json());
         setCategories(await cRes.json());
@@ -178,7 +178,7 @@ const AdminServices = () => {
             benefits: form.benefits.split(',').map(s => s.trim()).filter(Boolean),
             allowedPincodes: (form.allowedPincodes || '').split(',').map(s => s.trim()).filter(Boolean),
         };
-        const url = editing ? `http://localhost:5000/api/admin/services/${editing}` : `http://localhost:5000/api/admin/services`;
+        const url = editing ? `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/services/${editing}` : `${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/services`;
         const res = await fetch(url, {
             method: editing ? 'PUT' : 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${user?.token}` },
@@ -190,7 +190,7 @@ const AdminServices = () => {
 
     const handleDelete = async (id) => {
         if (!window.confirm('Delete this service?')) return;
-        await fetch(`http://localhost:5000/api/admin/services/${id}`, {
+        await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/services/${id}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${user?.token}` }
         });

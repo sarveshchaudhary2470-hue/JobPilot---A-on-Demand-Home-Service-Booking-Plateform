@@ -43,7 +43,7 @@ const AdminLayout = ({ children }) => {
         const checkEmergencies = async () => {
             if (!user?.token) return;
             try {
-                const res = await fetch('http://localhost:5000/api/admin/emergencies?status=Active', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/emergencies?status=Active`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 if (res.ok) {
@@ -69,7 +69,7 @@ const AdminLayout = ({ children }) => {
 
     const handleResolveEmergency = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/emergencies/${id}/resolve`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000"}/api/admin/emergencies/${id}/resolve`, {
                 method: 'PATCH',
                 headers: { Authorization: `Bearer ${user.token}` }
             });

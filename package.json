@@ -1,0 +1,17 @@
+{
+  "name": "jobpilot-platform",
+  "version": "1.0.0",
+  "description": "A comprehensive on-demand home service booking platform with MERN stack.",
+  "main": "backend/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "cd backend && npm install && npm start",
+    "build": "cd frontend && npm install && npm run build && cd ../backend && npm install",
+    "install-all": "cd frontend && npm install && cd ../backend && npm install"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Sarvesh Chaudhary",
+  "license": "ISC"
+}

@@ -22,10 +22,12 @@ const ServiceCard = ({ service }) => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 {/* Optional Rating Badge */}
-                <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-1 flex items-center gap-1 rounded font-bold text-xs">
-                    <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                    4.8
-                </div>
+                {service.reviews > 0 && (
+                    <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-1 flex items-center gap-1 rounded font-bold text-xs">
+                        <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                        {Number(service.rating).toFixed(1)}
+                    </div>
+                )}
             </div>
 
             <div className="p-4 flex flex-col flex-grow">
@@ -36,7 +38,14 @@ const ServiceCard = ({ service }) => {
                 {/* Rating / Review count */}
                 <div className="flex items-center text-xs text-gray-500 mb-2">
                     <Star className="w-3 h-3 fill-primary text-primary mr-1" />
-                    <span className="font-semibold text-gray-700 mr-1">4.8</span> (120 reviews)
+                    {service.reviews > 0 ? (
+                        <>
+                            <span className="font-semibold text-gray-700 mr-1">{Number(service.rating).toFixed(1)}</span> 
+                            ({service.reviews} {service.reviews === 1 ? 'review' : 'reviews'})
+                        </>
+                    ) : (
+                        <span className="font-semibold text-gray-700">New / No reviews yet</span>
+                    )}
                 </div>
 
                 <div className="text-sm font-bold text-gray-900 mb-3">

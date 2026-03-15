@@ -32,11 +32,11 @@ const serviceSchema = new mongoose.Schema({
     },
     rating: {
         type: Number,
-        default: 4.8
+        default: 0
     },
     reviews: {
         type: Number,
-        default: 120
+        default: 0
     },
     priceInfos: [{
         duration: String, // e.g., '1 hour', '2 hours'
